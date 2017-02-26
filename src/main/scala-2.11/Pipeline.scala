@@ -1,6 +1,6 @@
 import akka.actor.{ActorSystem, Props}
 import twitter4j.auth.{AccessToken, Authorization, RequestToken}
-import twitter4j.conf.Configuration
+import twitter4j.conf.{Configuration, ConfigurationBuilder}
 import twitter4j._
 
 /**
@@ -10,7 +10,13 @@ object Pipeline extends App {
   implicit val system = ActorSystem()
   implicit val executionContext = system.dispatcher
 
-  val stream: TwitterStream = new TwitterStreamFactory().getInstance()
+  val cb = new ConfigurationBuilder()
+    .setOAuthConsumerKey(sys.env("TWITTER_CONSUMER_KEY"))
+    .setOAuthConsumerSecret(sys.env("TWITTER_CONSUMER_SECRET"))
+    .setOAuthAccessToken(sys.env("TWITTER_TOKEN_KEY"))
+    .setOAuthAccessTokenSecret(sys.env("TWITTER_TOKEN_SECRET"))
+
+  val stream: TwitterStream = new TwitterStreamFactory(cb.build()).getInstance()
   val listener: StatusListener = new StatusListener {
     override def onStallWarning(warning: StallWarning): Unit = {
       println("stall warning")
