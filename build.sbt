@@ -11,7 +11,7 @@ lazy val akkaVersion = "2.4.14"
 libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-actor" % akkaVersion,
   "com.typesafe.slick" % "slick_2.11" % "3.1.1",
-  "com.typesafe.slick" %% "slick-hikaricp" % "3.1.0",
+  "com.typesafe.slick" %% "slick-hikaricp" % "3.1.1",
   "mysql" % "mysql-connector-java" % "5.1.40",
   "edu.stanford.nlp" % "stanford-corenlp" % "3.7.0",
   "edu.stanford.nlp" % "stanford-corenlp" % "3.7.0" classifier "models",
